@@ -37,26 +37,21 @@ namespace TestNinja.UnitTests
         }
 
         [TestMethod]
-        public void CanBeCancelledBy_UserIsUser_ReturnsTrue() {
-            //Arrange; Initialization
-            var reservation = new Reservation {MadeBy = new User()};
+        public void CanBeCancelledBy_SameUserIsCancellingTheReservation_ReturnsTrue() {
+            var user = new User();
+            var reservation = new Reservation {MadeBy = user};
 
-            //Act; Calliing a method
-            var result = reservation.CanBeCancelledBy(reservation.MadeBy);
+            var result = reservation.CanBeCancelledBy(user);
 
-            //Assert: Verifying if 'result' is correct.
             Assert.IsTrue(result);
         }
 
         [TestMethod]
-        public void CanBeCancelledBy_UserIsNotRecocgnized_ReturnsFalse() {
-            //Arrange; Initialization
-            var reservation = new Reservation();
+        public void CanBeCancelledBy_AnotherUserCancellingReservation_ReturnsFalse() {
+            var reservation = new Reservation {MadeBy = new User()};
 
-            //Act; Calliing a tested method as assigning the result to a variable.
             var result = reservation.CanBeCancelledBy(new User());
 
-            //Assert: Verifying if 'result' is correct.
             Assert.IsFalse(result);
         }
     }
