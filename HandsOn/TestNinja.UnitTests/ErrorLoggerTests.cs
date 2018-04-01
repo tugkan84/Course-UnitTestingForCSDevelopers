@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Runtime.CompilerServices;
+using NUnit.Framework;
 using TestNinja.Fundamentals;
 
 namespace TestNinja.UnitTests
@@ -6,13 +7,30 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class ErrorLoggerTests
     {
-        [Test]
+        private ErrorLogger _errorLogger;
+
+        [SetUp]
+        public void SetUp() {
+            _errorLogger = new ErrorLogger();
+        }
+
+    [Test]
         public void Log_WhenCalled_SetTheLastErrorProperty() {
-            var logger = new ErrorLogger();
+            _errorLogger.Log("a");
             
-            logger.Log("a");
+            Assert.That(_errorLogger.LastError, Is.EqualTo("a"));
+        }
+
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Log_InvalidError_ThrowArgumentNullException(string error) {
+            /* This will cause an exception*/
+            //_errorLogger.Log(error);
             
-            Assert.That(logger.LastError, Is.EqualTo("a"));
+            /* Need to use a delegate (lambda expression) */
+            Assert.That(() => _errorLogger.Log(error), Throws.ArgumentNullException);
         }
     }
 }
