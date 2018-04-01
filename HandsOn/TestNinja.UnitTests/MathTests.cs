@@ -14,7 +14,7 @@ namespace TestNinja.UnitTests
         private Math _math;
 
         [Test]
-        [Ignore("For trying out this attribute.")]
+//        [Ignore("For trying out this attribute.")]
         public void Add_WhenCalled_ReturnTheSumOfArguments() {
             var result = _math.Add(1, 2);
 
