@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+﻿            using System;
 using NUnit.Framework;
 using TestNinja.Fundamentals;
 
@@ -7,18 +7,18 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class ErrorLoggerTests
     {
-        private ErrorLogger _errorLogger;
+        private ErrorLogger _logger;
 
         [SetUp]
         public void SetUp() {
-            _errorLogger = new ErrorLogger();
+            _logger = new ErrorLogger();
         }
 
-    [Test]
+        [Test]
         public void Log_WhenCalled_SetTheLastErrorProperty() {
-            _errorLogger.Log("a");
+            _logger.Log("a");
             
-            Assert.That(_errorLogger.LastError, Is.EqualTo("a"));
+            Assert.That(_logger.LastError, Is.EqualTo("a"));
         }
 
         [Test]
@@ -27,10 +27,28 @@ namespace TestNinja.UnitTests
         [TestCase(" ")]
         public void Log_InvalidError_ThrowArgumentNullException(string error) {
             /* This will cause an exception*/
-            //_errorLogger.Log(error);
+            //_logger.Log(error);
             
             /* Need to use a delegate (lambda expression) */
-            Assert.That(() => _errorLogger.Log(error), Throws.ArgumentNullException);
+            Assert.That(() => _logger.Log(error), Throws.ArgumentNullException);
         }
+        
+        [Test]
+        public void Log_ValidError_RaiseErrorLoggedEvent() {
+            
+            /* arrange */
+            var id = Guid.Empty;
+            _logger.ErrorLogged += (sender, args) => { id = args; };
+            
+            
+            /* Act */
+            _logger.Log("a");
+            
+            /* Assert */
+            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
+        }
+    
+    
+    
     }
 }
