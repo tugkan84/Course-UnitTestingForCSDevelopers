@@ -22,6 +22,7 @@ namespace TestNinja.Fundamentals
             OnErrorLogged(Guid.NewGuid());
         }
         
+        
         /* private method being tested through the 'Log' public method. */
         private void OnErrorLogged(Guid errorId) {
             ErrorLogged?.Invoke(this, errorId);
