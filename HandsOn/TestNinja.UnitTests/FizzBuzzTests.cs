@@ -15,14 +15,14 @@ namespace TestNinja.UnitTests
 
         [Test]
         public void GetOutput_GivenNumberIsDivisableBy3Only_ReturnsFizz() {
-            var result = FizzBuzz.GetOutput(9);
+            var result = FizzBuzz.GetOutput(3);
 
             Assert.That(result, Is.EqualTo("Fizz"));
         }
 
         [Test]
         public void GetOutput_GivenNumberIsDivisableBy5Only_ReturnsBuzz() {
-            var result = FizzBuzz.GetOutput(25);
+            var result = FizzBuzz.GetOutput(5);
 
             Assert.That(result, Is.EqualTo("Buzz"));
         }
@@ -35,5 +35,4 @@ namespace TestNinja.UnitTests
         }
     }
 }
-    
-    
+ 
