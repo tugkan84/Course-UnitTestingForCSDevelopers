@@ -1,4 +1,4 @@
-﻿            using System;
+﻿using System;
 using NUnit.Framework;
 using TestNinja.Fundamentals;
 
@@ -47,8 +47,5 @@ namespace TestNinja.UnitTests
             /* Assert */
             Assert.That(id, Is.Not.EqualTo(Guid.Empty));
         }
-    
-    
-    
     }
 }
